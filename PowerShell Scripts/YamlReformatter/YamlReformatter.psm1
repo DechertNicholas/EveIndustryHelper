@@ -37,9 +37,23 @@ function RemoveTraitsFromYamlObj([hashtable]$YamlObj) {
         "mass",
         "marketGroupID",
         "metaGroupID")
-    $key = $YamlObj.Keys
     foreach ($trait in $toRemove) {
-        $YamlObj[$key].Remove($trait)
+        $YamlObj.Remove($trait)
     }
     return $YamlObj
+}
+
+function PrepYamlForDB($yaml) {
+    $splitYaml = SplitYamlEntries($yaml)
+    $formattedYaml = New-Object string[] $splitYaml.Count
+    for ($i = 0; $i -lt $splitYaml.Count; $i++) {
+        # '620:`n' -> '    typeID: 620`n'
+        $formattedYaml[$i] = $splitYaml[$i] -replace '^(\d+):','    typeID: $1'
+    }
+    $validYaml = ConvertFrom-Yaml $formattedYaml[1]
+    return $validYaml
+    # foreach ($key in $validYaml.Keys) {
+    #     Write-Host "$key " -NoNewline
+    #     Write-Host $validYaml[$key]
+    # }
 }
