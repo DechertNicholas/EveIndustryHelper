@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <form method="post">
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="InvGroups.FirstOrDefault().GroupId"></label>
+                </th>
+                <th>
+                    <label asp-for="InvGroups.FirstOrDefault().GroupName"></label>
+                </th>
+            </tr>
+            @foreach(var item in Model.InvGroups)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.GroupId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.GroupName)
+                    </td>
+                </tr>
+            }
+        </table>
+    </form>
+</div>
