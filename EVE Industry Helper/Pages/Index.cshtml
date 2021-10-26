@@ -9,23 +9,32 @@
         <table class="table table-striped border">
             <tr class="table-secondary">
                 <th>
-                    <label asp-for="InvGroups.FirstOrDefault().GroupId"></label>
+                    <label for="ProductName">Product Name</label>
                 </th>
                 <th>
-                    <label asp-for="InvGroups.FirstOrDefault().GroupName"></label>
+                    <label for="GroupName">Group Name</label>
                 </th>
+                @foreach(var material in Model.SelectedBlueprint.BillOfMaterials)
+                {
+                    <th>
+                        <label asp-for="@material.Name">@material.Name</label>
+                    </th>
+                }
             </tr>
-            @foreach(var item in Model.InvGroups)
-            {
-                <tr>
+            <tr>
+                <td>
+                    @Model.SelectedBlueprint.ProductName
+                </td>
+                <td>
+                    @Model.SelectedBlueprint.GroupName
+                </td>
+                @foreach (var material in Model.SelectedBlueprint.BillOfMaterials)
+                {
                     <td>
-                        @Html.DisplayFor(m => item.GroupId)
+                        @material.Quantity
                     </td>
-                    <td>
-                        @Html.DisplayFor(m => item.GroupName)
-                    </td>
-                </tr>
-            }
+                }
+            </tr>
         </table>
     </form>
 </div>
