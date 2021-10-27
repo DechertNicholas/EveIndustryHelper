@@ -31,7 +31,7 @@
                 @foreach (var material in Model.SelectedBlueprint.BillOfMaterials)
                 {
                     <td>
-                        @material.Quantity
+                        @String.Format("{0:n0}", material.Quantity)
                     </td>
                 }
             </tr>
