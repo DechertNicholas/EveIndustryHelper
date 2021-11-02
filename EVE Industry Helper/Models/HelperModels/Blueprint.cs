@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EVE_Industry_Helper.Models.HelperModels
 {
-    public class CompleteBlueprint
+    public class Blueprint
     {
         public string Name { get; set; }
         public int? TypeID { get; set; }
@@ -20,7 +20,7 @@ namespace EVE_Industry_Helper.Models.HelperModels
         public int TimeEfficiency { get; set; }
         public List<BlueprintMaterial> BillOfMaterials { get; set; }
 
-        public CompleteBlueprint()
+        public Blueprint()
         {
             if (BillOfMaterials == null)
             {

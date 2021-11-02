@@ -13,10 +13,11 @@ namespace EVE_Industry_Helper.Pages
 {
     public class IndexModel : PageModel
     {
+        public Blueprint SelectedBlueprint { get; set; }
+        public List<ProductionGroup> ProductionGroups { get; set; }
+        public string ShipName = "Rokh";
         private readonly ILogger<IndexModel> _logger;
         private readonly evesdeContext _db;
-        public CompleteBlueprint SelectedBlueprint { get; set; }
-        public string ShipName = "Rokh";
 
         public IndexModel(ILogger<IndexModel> logger, evesdeContext db)
         {
@@ -47,7 +48,7 @@ namespace EVE_Industry_Helper.Pages
                 .Where(i => i.GroupId == blueprintInfo.GroupId)
                 .FirstOrDefaultAsync();
 
-            SelectedBlueprint = new CompleteBlueprint
+            SelectedBlueprint = new Blueprint
             {
                 Name = blueprintInfo.TypeName,
 
@@ -86,6 +87,16 @@ namespace EVE_Industry_Helper.Pages
                         .GroupId
                 });
             }
+        }
+
+        public List<ProductionGroup> BuildProductionGroups(Blueprint blueprint)
+        {
+            // generate a list of group IDs from the blueprint
+            // see if each material is a product of a blueprint
+            // if so, add that blueprint to the production group's blueprint list
+            // if not, that material is a base material to be obtained by the player
+            // so, add that material to the groups material list for purchase/obtain
+            var productionGroup = new ProductionGroup();
         }
     }
 }
